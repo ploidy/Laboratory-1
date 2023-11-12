@@ -12,14 +12,9 @@ public class PlayerController : MonoBehaviour // player controller inherits from
     
     //Public Variables
     public string inputID;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //This is where we get plater input
         horizontalInput = Input.GetAxis("Horizontal" + inputID);

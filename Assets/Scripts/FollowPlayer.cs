@@ -10,11 +10,6 @@ public class FollowPlayer : MonoBehaviour
     private Vector3 firstPersonOffset = new Vector3(0, 1.85f, 2.5f);
     private Boolean firstPersonCamera = false;
     public String InputID;
-       // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame. Late update lets vehicle move first, which smoothes the camera follow
     void LateUpdate()
@@ -30,7 +25,7 @@ public class FollowPlayer : MonoBehaviour
                 firstPersonCamera = true;
             }
         }
-        //change camera if user presses space/jump
+        //change camera if user presses input (c for Player1, Left CTRL for Player2)
         if (firstPersonCamera)
         {
             //offset to first person camera
