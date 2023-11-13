@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour // player controller inherits from
     [SerializeField] GameObject centerOfMass;
     [SerializeField] TextMeshProUGUI speedometerText;
     [SerializeField] TextMeshProUGUI rpmText;
-    
+    [SerializeField] List<WheelCollider> allWheels;
+    [SerializeField] int wheelsOnGround;
 
     public string inputID;
 
@@ -33,6 +34,9 @@ public class PlayerController : MonoBehaviour // player controller inherits from
         forwardInput = Input.GetAxis ("Vertical" + inputID);
         // Move the vehicle forward based on vertical input
         // transform.Translate (Vector3.forward * Time.deltaTime * speed * forwardInput);
+        
+        if (IsOnGround())
+        {
         playerRb.AddRelativeForce(Vector3.forward * horsePower * forwardInput);
         // Rotates the car based on horizontal input
         transform.Rotate (Vector3.up, turnSpeed * horizontalInput * Time.deltaTime);
@@ -42,5 +46,27 @@ public class PlayerController : MonoBehaviour // player controller inherits from
 
         rpm = Mathf.Round ((speed % 30) * 50); //% modulus/remainder operator. Divides speed by 30
         rpmText.SetText("RPM:" + rpm);
+        }
     }
+    bool IsOnGround()
+    {
+        wheelsOnGround = 0;
+        foreach (WheelCollider wheel in allWheels)
+        {
+            if (wheel.isGrounded)
+            {
+                wheelsOnGround++;
+            }
+        }
+
+        if (wheelsOnGround ==4)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 }
