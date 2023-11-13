@@ -7,12 +7,14 @@ public class PlayerController : MonoBehaviour // player controller inherits from
 {
     [SerializeField] float speed;
     [SerializeField] private float horsePower = 0;
+    [SerializeField] float rpm;
     [SerializeField] float turnSpeed = 45.0f;
     private float horizontalInput;
     private float forwardInput;
     private Rigidbody playerRb;
     [SerializeField] GameObject centerOfMass;
     [SerializeField] TextMeshProUGUI speedometerText;
+    [SerializeField] TextMeshProUGUI rpmText;
     
 
     public string inputID;
@@ -37,5 +39,8 @@ public class PlayerController : MonoBehaviour // player controller inherits from
 
         speed = Mathf.Round(playerRb.velocity.magnitude *2.237f);
         speedometerText.SetText("Speed: " + speed + "mph");
+
+        rpm = Mathf.Round ((speed % 30) * 50); //% modulus/remainder operator. Divides speed by 30
+        rpmText.SetText("RPM:" + rpm);
     }
 }
